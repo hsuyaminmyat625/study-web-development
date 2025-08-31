@@ -1,0 +1,30 @@
+body {
+    font-family: 'Segoe UI', 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-top: 40px;
+}
+p {
+    text-align: center;
+    color: #333;
+}
+a {
+    display: block;
+    width: 120px;
+    margin: 30px auto;
+    padding: 10px 0;
+    background: #3498db;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+a:hover {
+    background: #217dbb;
+}
