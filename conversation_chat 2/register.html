@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新規登録 - AIチャット</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0d1117;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #e6edf3;
+    }
+
+    .register-container {
+      background: #161b22;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      border: 1px solid #30363d;
+      width: 100%;
+      max-width: 450px;
+      margin: 1rem;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .header h1 {
+      color: #e6edf3;
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #e6edf3;
+      font-weight: 500;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: #0d1117;
+      color: #e6edf3;
+    }
+
+    .form-group input:focus {
+      border-color: #1f6feb;
+      box-shadow: 0 0 0 2px rgba(31, 111, 235, 0.2);
+    }
+
+    .form-group input::placeholder {
+      color: #8b949e;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 0.75rem 1.5rem;
+      background: #1f6feb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 1rem;
+    }
+
+    .register-btn:hover {
+      background: #388bfd;
+      transform: translateY(-1px);
+    }
+
+    .register-btn:active {
+      transform: translateY(0);
+      background: #1f6feb;
+    }
+
+    .login-link {
+      text-align: center;
+      color: #8b949e;
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: #1f6feb;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+      color: #388bfd;
+    }
+
+    .error-message {
+      background: #0c2d6b;
+      color: #e6edf3;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #1f6feb;
+      display: none;
+    }
+
+    .success-message {
+      background: #0c2d6b;
+      color: #e6edf3;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #1f6feb;
+      display: none;
+    }
+
+    .password-requirements {
+      background: #21262d;
+      padding: 0.75rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #30363d;
+      font-size: 0.8rem;
+      color: #8b949e;
+    }
+
+    .password-requirements ul {
+      margin: 0.5rem 0 0 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .register-container {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <div class="header">
+      <h1>🤖 AI チャット</h1>
+      <p>新規アカウントを作成</p>
+    </div>
+
+    <div id="error-message" class="error-message"></div>
+    <div id="success-message" class="success-message"></div>
+
+    <form id="register-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first_name">姓</label>
+          <input type="text" id="first_name" name="first_name" required>
+        </div>
+        <div class="form-group">
+          <label for="last_name">名</label>
+          <input type="text" id="last_name" name="last_name" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">メールアドレス</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">パスワード</label>
+        <input type="password" id="password" name="password" required>
+        <div class="password-requirements">
+          <strong>パスワード要件：</strong>
+          <ul>
+            <li>8文字以上</li>
+            <li>英数字を含む</li>
+            <li>大文字・小文字を含む</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm_password">パスワード（確認）</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+      </div>
+
+      <button type="submit" class="register-btn">新規登録</button>
+    </form>
+
+    <div class="login-link">
+      既にアカウントをお持ちの方は<a href="login.html">ログイン</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('register-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const firstName = document.getElementById('first_name').value;
+      const lastName = document.getElementById('last_name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirm_password').value;
+      
+      // パスワード確認
+      if (password !== confirmPassword) {
+        showMessage('error-message', 'パスワードが一致しません。');
+        return;
+      }
+      
+      // パスワード強度チェック
+      if (password.length < 8) {
+        showMessage('error-message', 'パスワードは8文字以上で入力してください。');
+        return;
+      }
+      
+      if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) {
+        showMessage('error-message', 'パスワードは英数字と大文字・小文字を含む必要があります。');
+        return;
+      }
+      
+      try {
+        const response = await fetch('register.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ 
+            first_name: firstName, 
+            last_name: lastName, 
+            email, 
+            password 
+          })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          showMessage('success-message', '登録に成功しました！ログインページにリダイレクト中...');
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 2000);
+        } else {
+          showMessage('error-message', data.message || '登録に失敗しました。');
+        }
+      } catch (error) {
+        showMessage('error-message', 'エラーが発生しました。もう一度お試しください。');
+      }
+    });
+
+    function showMessage(elementId, message) {
+      const element = document.getElementById(elementId);
+      element.textContent = message;
+      element.style.display = 'block';
+      
+      setTimeout(() => {
+        element.style.display = 'none';
+      }, 5000);
+    }
+
+    // ログイン済みの場合はチャットページにリダイレクト
+    if (localStorage.getItem('is_logged_in') === 'true') {
+      window.location.href = 'conversation.html';
+    }
+  </script>
+</body>
+</html> 
